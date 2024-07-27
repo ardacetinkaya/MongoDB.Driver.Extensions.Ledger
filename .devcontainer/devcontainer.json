@@ -1,0 +1,19 @@
+{
+    "name": "C# (.NET 8) & MongoDB",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+        "ms-dotnettools.csharp",
+        "mongodb.mongodb-vscode"
+    ],
+    "forwardPorts": [
+        27017
+    ],
+    "postCreateCommand": "dotnet restore",
+    "remoteUser": "root"
+}
