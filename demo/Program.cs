@@ -27,12 +27,12 @@ Console.WriteLine("Expense is updated.");
 
 expense.Status = "Spent";
 
-var filter = Builders<Expense>.Filter.Eq(doc => doc.Id, expense.Id);
+filter = Builders<Expense>.Filter.Eq(doc => doc.Id, expense.Id);
 await collection.ReplaceOneAsLedger(expense, filter);
 Console.WriteLine("Expense is updated.");
 
 expense.Status = "Reimbursed";
 
-var filter = Builders<Expense>.Filter.Eq(doc => doc.Id, expense.Id);
+filter = Builders<Expense>.Filter.Eq(doc => doc.Id, expense.Id);
 await collection.ReplaceOneAsLedger(expense, filter);
 Console.WriteLine("Expense is updated.");
