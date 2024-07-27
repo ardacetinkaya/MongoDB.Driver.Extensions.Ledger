@@ -23,3 +23,11 @@ jobs:
 
     - name: Build
       run: dotnet build src/MongoDB.Driver.Extensions.Ledger.csproj --configuration Release --no-restore
+
+    - name: Publish nuget
+      run: |
+           for f in ./out/*.nupkg
+           do
+             curl -vX PUT -u "ardacetinkaya:${{ secrets.NugetSecret }}" -F package=@$f https://nuget.pkg.github.com/ardacetinkaya/
+           done
+      shell: bash
