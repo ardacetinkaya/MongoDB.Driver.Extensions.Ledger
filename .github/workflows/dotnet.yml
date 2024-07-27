@@ -27,7 +27,7 @@ jobs:
     - name: Pack
       run: dotnet pack src/MongoDB.Driver.Extensions.Ledger.csproj -c Release -o out --no-build
 
-    - name: Publish NuGet package
-      env:
-        NUGET_API_KEY: ${{ secrets.NugetSecret }}
-      run: dotnet nuget push "./out/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key $NUGET_API_KEY
+    # - name: Publish NuGet package
+    #   env:
+    #     NUGET_API_KEY: ${{ secrets.NugetSecret }}
+    #   run: dotnet nuget push "./out/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key $NUGET_API_KEY
