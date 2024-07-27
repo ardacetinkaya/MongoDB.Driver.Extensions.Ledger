@@ -8,11 +8,7 @@ The main motivation for this repository is to be able to use ledger approach wit
 
 
 ### Installation
-You can install this library via NuGet Package Manager:
 
-```bash
-dotnet add package MongoDB.Driver.Extensions.Ledger
-```
 
 ### Usage and How It Works
 
