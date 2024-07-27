@@ -9,10 +9,15 @@
 		<Version>1.0.0</Version>
 		<Authors>Arda Cetinkaya</Authors>
 		<PackageTags>MongoDB;.NET;Ledger;Audit;History</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/ardacetinkaya/MongoDB.Driver.Extensions.Ledger</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="MongoDB.Driver" Version="2.28.0" />
 	</ItemGroup>
+
+	   <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 </Project>
