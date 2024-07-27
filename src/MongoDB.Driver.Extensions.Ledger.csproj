@@ -3,6 +3,14 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
+		<PackageId>MongoDB.Driver.Extensions.Ledger</PackageId>
+		<Description>A .NET library that extends the **MongoDB** driver to include **ledger** functionality.
+		Allowing you to maintain a "audit or history" log of document operations (insert, update, delete) within a MongoDB collection.
+		</Description>
+		<Version>1.0.0</Version>
+		<Authors>Arda Cetinkaya</Authors>
+		<PackageTags>MongoDB;.NET;Ledger;Audit;History</PackageTags>
+		<RepositoryUrl>https://github.com/ardacetinkaya/MongoDB.Driver.Extensions.Ledger</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
