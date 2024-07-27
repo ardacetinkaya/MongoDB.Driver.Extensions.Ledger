@@ -93,3 +93,5 @@ This is a simple demo showcasing how to use the **MongoDB.Driver.Extensions.Ledg
 ```bash
 dotnet run
 ```
+
+> **_NOTE:_**  MongoDB Atlas is used for the demo. Free tier is available for MongoDB Atlas but Free tier does not have support for sharded cluster instances so transaction usage is not possible.
