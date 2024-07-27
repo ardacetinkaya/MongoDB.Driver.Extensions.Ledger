@@ -52,12 +52,11 @@ public static class LedgerExtensions
             session.StartTransaction();
 
             // Insert the document into the collection
-            var insertTask = collection.InsertOneAsync(session, document);
+            await collection.InsertOneAsync(session, document);
 
             // Insert the log record
-            var logInsertTask = logCollection.InsertOneAsync(session, logRecord);
+            await logCollection.InsertOneAsync(session, logRecord);
 
-            await Task.WhenAll(insertTask, logInsertTask);
             session.CommitTransaction();
         }
         catch (Exception)
@@ -111,7 +110,7 @@ public static class LedgerExtensions
             session.StartTransaction();
 
             // Replace the document in the collection
-            var replaceTask = collection.ReplaceOneAsync(session, filter, document);
+            await collection.ReplaceOneAsync(session, filter, document);
 
             // Find the most recent log record for the document
             var logRecordFilter = Builders<LogRecord<T>>.Filter.Eq(p => p.Metadata.OriginalId, originalId);
@@ -129,9 +128,8 @@ public static class LedgerExtensions
             }
 
             // Insert the log record
-            var logInsertTask = logCollection.InsertOneAsync(session, logRecord);
+            await logCollection.InsertOneAsync(session, logRecord);
 
-            await Task.WhenAll(replaceTask, logInsertTask);
             session.CommitTransaction();
         }
         catch (Exception)
@@ -181,7 +179,7 @@ public static class LedgerExtensions
             ArgumentNullException.ThrowIfNull(existingDocument, nameof(existingDocument));
 
             // Delete the document from the collection
-            var deleteTask = collection.DeleteOneAsync(session, filter);
+            await collection.DeleteOneAsync(session, filter);
 
             // Get the original ID of the document
             var originalId = existingDocument.ToBsonDocument()["_id"].ToString();
@@ -208,9 +206,8 @@ public static class LedgerExtensions
             }
 
             // Insert the log record
-            var logInsertTask = logCollection.InsertOneAsync(session, logRecord);
+            await logCollection.InsertOneAsync(session, logRecord);
 
-            await Task.WhenAll(deleteTask, logInsertTask);
             session.CommitTransaction();
         }
         catch (Exception)
