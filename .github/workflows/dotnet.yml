@@ -24,6 +24,9 @@ jobs:
     - name: Build
       run: dotnet build src/MongoDB.Driver.Extensions.Ledger.csproj --configuration Release --no-restore
 
+    - name: Pack
+      run: dotnet pack src/MongoDB.Driver.Extensions.Ledger.csproj -c Release -o out --no-build
+
     - name: Publish nuget
       run: |
            for f in ./out/*.nupkg
