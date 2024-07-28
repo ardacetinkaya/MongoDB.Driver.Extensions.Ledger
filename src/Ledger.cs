@@ -120,18 +120,11 @@ public static class LedgerExtensions
                 .Sort(sort)
                 .FirstOrDefaultAsync();
 
-            if (existinglog == null)
-            {
-                throw new ArgumentNullException(nameof(existinglog));
-            }
-            else
-            {
-                // Update the log record with the previous hash and increment the version
-                logRecord.Metadata.PreviousHash = existinglog.Metadata.Hash;
-                logRecord.Metadata.Version = existinglog.Metadata.Version + 1;
-            } else {
-                throw new ArgumentNullException(nameof(existinglog));
-            }
+            ArgumentNullException.ThrowIfNull(existinglog, nameof(existinglog));
+
+            // Update the log record with the previous hash and increment the version
+            logRecord.Metadata.PreviousHash = existinglog.Metadata.Hash;
+            logRecord.Metadata.Version = existinglog.Metadata.Version + 1;
 
             // Insert the log record
             await logCollection.InsertOneAsync(session, logRecord);
@@ -201,21 +194,14 @@ public static class LedgerExtensions
                 .Sort(sort)
                 .FirstOrDefaultAsync();
 
-            if (existinglog == null)
-            {
-                throw new ArgumentNullException(nameof(existinglog));
-            }
-            else
-            {
-                // Update the log record with the previous hash, increment the version,add the original ID and data
-                logRecord.Metadata.PreviousHash = existinglog.Metadata.Hash;
-                logRecord.Metadata.Version = existinglog.Metadata.Version + 1;
-                logRecord.Metadata.OriginalId = originalId;
-                logRecord.Metadata.Hash = BitConverter.ToString(hash).Replace("-", "").ToLower();
-                logRecord.Data = existingDocument;
-            } else {
-                throw new ArgumentNullException(nameof(existinglog));
-            }
+            ArgumentNullException.ThrowIfNull(existinglog, nameof(existinglog));
+
+            // Update the log record with the previous hash, increment the version,add the original ID and data
+            logRecord.Metadata.PreviousHash = existinglog.Metadata.Hash;
+            logRecord.Metadata.Version = existinglog.Metadata.Version + 1;
+            logRecord.Metadata.OriginalId = originalId;
+            logRecord.Metadata.Hash = BitConverter.ToString(hash).Replace("-", "").ToLower();
+            logRecord.Data = existingDocument;
 
             // Insert the log record
             await logCollection.InsertOneAsync(session, logRecord);
