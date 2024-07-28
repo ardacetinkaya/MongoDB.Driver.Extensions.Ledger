@@ -125,6 +125,8 @@ public static class LedgerExtensions
             {
                 logRecord.Metadata.PreviousHash = existinglog.Metadata.Hash;
                 logRecord.Metadata.Version = existinglog.Metadata.Version + 1;
+            } else {
+                throw new ArgumentNullException(nameof(existinglog));
             }
 
             // Insert the log record
@@ -203,6 +205,8 @@ public static class LedgerExtensions
                 logRecord.Metadata.OriginalId = originalId;
                 logRecord.Metadata.Hash = BitConverter.ToString(hash).Replace("-", "").ToLower();
                 logRecord.Data = existingDocument;
+            } else {
+                throw new ArgumentNullException(nameof(existinglog));
             }
 
             // Insert the log record
