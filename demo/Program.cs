@@ -3,7 +3,8 @@ using MongoDB.Driver.Extensions.Ledger;
 
 Console.WriteLine("Hello, MongoDB Ledger!");
 
-var client = new MongoClient("__CONNECTION_STRING__");
+var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+var client = new MongoClient(connectionString);
 var database = client.GetDatabase("Budget");
 var collection = database.GetCollection<Expense>("Expenses");
 

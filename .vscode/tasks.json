@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "env": {
+            "CONNECTION_STRING": "connection_string"
+        }
+    },
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/MongoDB.Driver.Extensions.Ledger.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary;ForceNoAlign"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/demo/demo.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

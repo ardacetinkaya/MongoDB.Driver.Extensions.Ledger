@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/demo/bin/Debug/net8.0/demo.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/demo",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                "CONNECTION_STRING": "connection_string"
+            },
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}
