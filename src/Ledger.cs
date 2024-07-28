@@ -120,9 +120,13 @@ public static class LedgerExtensions
                 .Sort(sort)
                 .FirstOrDefaultAsync();
 
-            // Update the log record with the previous hash and increment the version
-            if (existinglog != null)
+            if (existinglog == null)
             {
+                throw new ArgumentNullException(nameof(existinglog));
+            }
+            else
+            {
+                // Update the log record with the previous hash and increment the version
                 logRecord.Metadata.PreviousHash = existinglog.Metadata.Hash;
                 logRecord.Metadata.Version = existinglog.Metadata.Version + 1;
             } else {
@@ -197,9 +201,13 @@ public static class LedgerExtensions
                 .Sort(sort)
                 .FirstOrDefaultAsync();
 
-            // Update the log record with the previous hash, increment the version,add the original ID and data
-            if (existinglog != null)
+            if (existinglog == null)
             {
+                throw new ArgumentNullException(nameof(existinglog));
+            }
+            else
+            {
+                // Update the log record with the previous hash, increment the version,add the original ID and data
                 logRecord.Metadata.PreviousHash = existinglog.Metadata.Hash;
                 logRecord.Metadata.Version = existinglog.Metadata.Version + 1;
                 logRecord.Metadata.OriginalId = originalId;
