@@ -11,7 +11,7 @@ var collection = database.GetCollection<Expense>("Expenses");
 
 var expense = new Expense
 {
-    Id = "102",
+    Id = "1023456",
     Amount = 50.00m,
     Category = "Food",
     Status = "Requested",
@@ -35,5 +35,9 @@ Console.WriteLine("Expense is updated.");
 expense.Status = "Reimbursed";
 
 filter = Builders<Expense>.Filter.Eq(doc => doc.Id, expense.Id);
+
+if(!await collection.VerifyOneFromLedger(expense))
+    throw new Exception("Ledger is corrupted");
+
 await collection.ReplaceOneAsLedger(expense, filter);
 Console.WriteLine("Expense is updated.");

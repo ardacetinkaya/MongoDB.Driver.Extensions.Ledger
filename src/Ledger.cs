@@ -243,20 +243,11 @@ public static class LedgerExtensions
         // Check if there is any missing version in the log history
         for (int i = 0; i < logRecords.Count; i++)
         {
-            if (logRecords[i].Metadata.Version != i || (i > 0 && logRecords[i].Metadata.PreviousHash != logRecords[i - 1].Metadata.Hash))
+            var isHashValid = i > 0 && logRecords[i].Metadata.PreviousHash != logRecords[i - 1].Metadata.Hash;
+            if (logRecords[i].Metadata.Version != i || isHashValid)
             {
                 return false;
             }
-        }
-
-        // Create a SHA256 hash of the entity's JSON representation
-        var currentHash = SHA256.HashData(Encoding.UTF8.GetBytes(document.ToJson()));
-        var currentHashString = BitConverter.ToString(currentHash).Replace("-", "").ToLower();
-
-        // Compare the current hash with the stored hash
-        if (currentHashString != logRecords.Last().Metadata.Hash)
-        {
-            return false;
         }
 
         return true;

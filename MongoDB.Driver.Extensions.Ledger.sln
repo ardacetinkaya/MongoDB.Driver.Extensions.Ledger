@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDB.Driver.Extensions.Ledger", "src\MongoDB.Driver.Extensions.Ledger.csproj", "{F3B48382-0CAC-4F5C-BD73-0FA7D949D90F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demo", "demo\demo.csproj", "{F9BCDE39-A15E-4BE4-BA03-5568BD73D6C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F3B48382-0CAC-4F5C-BD73-0FA7D949D90F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3B48382-0CAC-4F5C-BD73-0FA7D949D90F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3B48382-0CAC-4F5C-BD73-0FA7D949D90F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9BCDE39-A15E-4BE4-BA03-5568BD73D6C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9BCDE39-A15E-4BE4-BA03-5568BD73D6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9BCDE39-A15E-4BE4-BA03-5568BD73D6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9BCDE39-A15E-4BE4-BA03-5568BD73D6C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
