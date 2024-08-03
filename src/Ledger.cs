@@ -1,4 +1,5 @@
 using MongoDB.Bson;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -15,7 +16,7 @@ public static class LedgerExtensions
     /// <param name="collection"></param>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static async Task InsertOneAsLedger<T>(this IMongoCollection<T> collection, T document)
+    public static async Task InsertOneAsLedger<T>(this IMongoCollection<T> collection, [NotNull] T document)
     {
         // Get the database and log collection
         var db = collection.Database.Client.GetDatabase(collection.Database.DatabaseNamespace.DatabaseName);
@@ -75,7 +76,7 @@ public static class LedgerExtensions
     /// <param name="document"></param>
     /// <param name="filter"></param>
     /// <returns></returns>
-    public static async Task ReplaceOneAsLedger<T>(this IMongoCollection<T> collection, T document, FilterDefinition<T> filter)
+    public static async Task ReplaceOneAsLedger<T>(this IMongoCollection<T> collection, [NotNull] T document, FilterDefinition<T> filter)
     {
         // Get the database and log collection
         var db = collection.Database.Client.GetDatabase(collection.Database.DatabaseNamespace.DatabaseName);
@@ -215,4 +216,42 @@ public static class LedgerExtensions
             throw;
         }
     }
+
+    /// <summary>
+    /// Verifies if an item's history is unchanged by comparing the current hash with the stored hash
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="collection"></param>
+    /// <param name="document"></param>
+    /// <returns></returns>
+    public static async Task<bool> VerifyOneFromLedger<T>(this IMongoCollection<T> collection, [NotNull] T document)
+    {
+        // Get the database and log collection
+        var db = collection.Database.Client.GetDatabase(collection.Database.DatabaseNamespace.DatabaseName);
+        var logCollection = db.GetCollection<LogRecord<T>>($"{collection.CollectionNamespace.CollectionName}{LOG_COLLECTION_PREFIX}");
+
+        // Get the original ID of the entity
+        var originalId = document.ToBsonDocument()["_id"].ToString();
+
+        // Retrieve the log records for the document
+        var logRecordFilter = Builders<LogRecord<T>>.Filter.Eq(p => p.Metadata.OriginalId, originalId);
+        var sort = Builders<LogRecord<T>>.Sort.Ascending(doc => doc.Metadata.Version);
+        var logRecords = await logCollection
+            .Find(logRecordFilter)
+            .Sort(sort)
+            .ToListAsync();
+
+        // Check if there is any missing version in the log history
+        for (int i = 0; i < logRecords.Count; i++)
+        {
+            var isHashValid = i > 0 && logRecords[i].Metadata.PreviousHash != logRecords[i - 1].Metadata.Hash;
+            if (logRecords[i].Metadata.Version != i || isHashValid)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
+

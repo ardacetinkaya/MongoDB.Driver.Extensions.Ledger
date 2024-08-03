@@ -59,6 +59,16 @@ await collection.DeleteOneAsLedger(filter);
     - Deletes the document from the specified collection based on the provided filter.
     - Logs the operation in a audit or history collection with a unique ID, SHA256 hash of the document, and metadata, including the previous hash and versioning.
 
+ #### Verify a document
+
+```csharp
+var collection = database.GetCollection<MyDocument>("myCollection");
+await collection.VerifyOneFromLedger(document); /* Fectched or updated document */
+```
+
+- `VerifyOneFromLedger`
+    - Verifies a document's versions and hashes in audit or history log   
+
 ### Log Document Model
 
 Log document has the following model to have audit or history log in the collection.
