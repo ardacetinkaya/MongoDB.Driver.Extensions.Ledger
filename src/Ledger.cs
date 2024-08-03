@@ -1,4 +1,5 @@
 using MongoDB.Bson;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -15,7 +16,7 @@ public static class LedgerExtensions
     /// <param name="collection"></param>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static async Task InsertOneAsLedger<T>(this IMongoCollection<T> collection, T document)
+    public static async Task InsertOneAsLedger<T>(this IMongoCollection<T> collection, [NotNull] T document)
     {
         // Get the database and log collection
         var db = collection.Database.Client.GetDatabase(collection.Database.DatabaseNamespace.DatabaseName);
@@ -75,7 +76,7 @@ public static class LedgerExtensions
     /// <param name="document"></param>
     /// <param name="filter"></param>
     /// <returns></returns>
-    public static async Task ReplaceOneAsLedger<T>(this IMongoCollection<T> collection, T document, FilterDefinition<T> filter)
+    public static async Task ReplaceOneAsLedger<T>(this IMongoCollection<T> collection, [NotNull] T document, FilterDefinition<T> filter)
     {
         // Get the database and log collection
         var db = collection.Database.Client.GetDatabase(collection.Database.DatabaseNamespace.DatabaseName);
@@ -223,7 +224,7 @@ public static class LedgerExtensions
     /// <param name="collection"></param>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static async Task<bool> VerifyOneFromLedger<T>(this IMongoCollection<T> collection, T document)
+    public static async Task<bool> VerifyOneFromLedger<T>(this IMongoCollection<T> collection, [NotNull] T document)
     {
         // Get the database and log collection
         var db = collection.Database.Client.GetDatabase(collection.Database.DatabaseNamespace.DatabaseName);
