@@ -3,8 +3,12 @@ name: .NET
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'src/**/*.csproj'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'src/**/*.csproj'
 
 jobs:
   build:
@@ -26,6 +30,21 @@ jobs:
 
     - name: Pack
       run: dotnet pack src/MongoDB.Driver.Extensions.Ledger.csproj -c Release -o out --no-build
+
+    outputs:
+      package_path: ${{ steps.pack.outputs.package_path }}
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && github.event.pull_request.merged == true
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
 
     - name: Publish NuGet package
       env:
