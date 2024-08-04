@@ -1,5 +1,7 @@
 # MongoDB.Driver.Extensions.Ledger
 
+[![.NET](https://github.com/ardacetinkaya/MongoDB.Driver.Extensions.Ledger/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/ardacetinkaya/MongoDB.Driver.Extensions.Ledger/actions/workflows/dotnet.yml)
+
 **MongoDB.Driver.Extensions.Ledger** is a .NET library that extends the **MongoDB** driver to include **ledger** functionality, allowing you to maintain a "audit or history" log of document operations (insert, update, delete) within a MongoDB collection. All document operations are stored in append-only mode so that any change can be preserved.
 
 Once the document has been stored in a ledger, it is aimed to not be changed later. Within this extension SHA256 hashed document is preserved within log collection so that if an unauthorized change is made to the document, the change can be determined.
