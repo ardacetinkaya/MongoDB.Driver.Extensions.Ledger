@@ -1,6 +1,7 @@
 # MongoDB.Driver.Extensions.Ledger
 
-[![.NET](https://github.com/ardacetinkaya/MongoDB.Driver.Extensions.Ledger/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ardacetinkaya/MongoDB.Driver.Extensions.Ledger/actions/workflows/build.yml)
+[![.NET](https://github.com/ardacetinkaya/MongoDB.Driver.Extensions.Ledger/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ardacetinkaya/MongoDB.Driver.Extensions.Ledger/actions/workflows/build.yml) [![NuGet Version](https://img.shields.io/nuget/v/MNGDB.Extensions.Ledger)](https://www.nuget.org/packages/MNGDB.Extensions.Ledger)
+
 
 **MongoDB.Driver.Extensions.Ledger** is a .NET library that extends the **MongoDB** driver to include **ledger** functionality, allowing you to maintain a "audit or history" log of document operations (insert, update, delete) within a MongoDB collection. All document operations are stored in append-only mode so that any change can be preserved.
 
