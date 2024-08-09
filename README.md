@@ -11,6 +11,10 @@ The main motivation for this repository is to be able to use ledger approach wit
 
 ### Installation
 
+```bash
+dotnet add package MNGDB.Extensions.Ledger --version 1.0.0
+```
+
 
 ### Usage and How It Works
 
