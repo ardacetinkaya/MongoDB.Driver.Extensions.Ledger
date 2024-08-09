@@ -50,3 +50,20 @@ jobs:
       env:
         NUGET_API_KEY: ${{ secrets.NugetSecret }}
       run: dotnet nuget push "./out/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key $NUGET_API_KEY
+
+    - name: Extract version from .csproj
+      id: extract_version
+      run: |
+        VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" src/MongoDB.Driver.Extensions.Ledger.csproj)
+        echo "##[set-output name=VERSION;]$VERSION"
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.extract_version.outputs.VERSION }}
+        release_name: Release ${{ steps.extract_version.outputs.VERSION }}
+        body: "Release of version ${{ steps.extract_version.outputs.VERSION }}."
+        draft: false
+        prerelease: false
