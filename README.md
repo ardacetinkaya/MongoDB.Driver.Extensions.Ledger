@@ -13,7 +13,7 @@ The main motivation for this repository is to be able to use ledger approach wit
 ### Installation
 
 ```bash
-dotnet add package MNGDB.Extensions.Ledger --version 1.0.0
+dotnet add package MNGDB.Extensions.Ledger --version 2.0.0
 ```
 
 
