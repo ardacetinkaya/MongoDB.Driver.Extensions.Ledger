@@ -9,7 +9,8 @@
     },
     "extensions": [
         "ms-dotnettools.csharp",
-        "mongodb.mongodb-vscode"
+        "mongodb.mongodb-vscode",
+        "ms-dotnettools.csdevkit"
     ],
     "forwardPorts": [
         27017
