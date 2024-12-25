@@ -1,5 +1,5 @@
 {
-    "name": "C# (.NET 8) & MongoDB",
+    "name": "C# (.NET 9) & MongoDB",
     "build": {
         "dockerfile": "Dockerfile",
         "context": "."

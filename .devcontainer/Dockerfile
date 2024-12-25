@@ -1,5 +1,5 @@
-# Use the official .NET 8 SDK image as a parent image
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
+# Use the official .NET 9 SDK image as a parent image
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS base
 
 # Install MongoDB tools
 RUN apt-get update && apt-get install -y \
